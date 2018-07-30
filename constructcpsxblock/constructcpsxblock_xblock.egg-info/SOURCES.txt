@@ -1,0 +1,12 @@
+constructcpsxblock/__init__.py
+constructcpsxblock/constructcpsxblock.py
+constructcpsxblock/static/README.txt
+constructcpsxblock/static/css/constructcpsxblock.css
+constructcpsxblock/static/html/constructcpsxblock.html
+constructcpsxblock/static/js/src/constructcpsxblock.js
+constructcpsxblock_xblock.egg-info/PKG-INFO
+constructcpsxblock_xblock.egg-info/SOURCES.txt
+constructcpsxblock_xblock.egg-info/dependency_links.txt
+constructcpsxblock_xblock.egg-info/entry_points.txt
+constructcpsxblock_xblock.egg-info/requires.txt
+constructcpsxblock_xblock.egg-info/top_level.txt

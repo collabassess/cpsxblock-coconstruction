@@ -1,0 +1,8 @@
+version: '2'
+services:
+  dev:
+    image: 'cpsxblock/coconstruct'
+    container_name: xblock-coconstruct
+    build: .
+    ports:
+      - "5000:8000"

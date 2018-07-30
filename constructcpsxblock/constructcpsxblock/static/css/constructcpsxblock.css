@@ -1,0 +1,9 @@
+/* CSS for CoConstructCPSXBlock */
+
+.constructcpsxblock_block .count {
+    font-weight: bold;
+}
+
+.constructcpsxblock_block p {
+    cursor: pointer;
+}

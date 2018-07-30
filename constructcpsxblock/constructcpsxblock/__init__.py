@@ -1,0 +1,1 @@
+from .constructcpsxblock import CoConstructCPSXBlock
