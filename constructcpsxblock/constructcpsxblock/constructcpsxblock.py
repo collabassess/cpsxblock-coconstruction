@@ -2,7 +2,7 @@
 
 import pkg_resources
 from xblock.core import XBlock
-from xblock.fields import Integer, Scope
+from xblock.fields import Integer, Scope, String
 from xblock.fragment import Fragment
 
 
@@ -18,6 +18,21 @@ class CoConstructCPSXBlock(XBlock):
     count = Integer(
         default=0, scope=Scope.user_state,
         help="A simple counter, to show something happening",
+    )
+
+    provider_userA = String(
+        default="", scope=Scope.settings,
+        help="The target module for Version 1's \"Part 1\""
+    )
+
+    provider_userB = String(
+        default="", scope=Scope.settings,
+        help="The target module for Version 2's \"Part 1\""
+    )
+
+    receiver = String(
+        default="", scope=Scope.settings,
+        help="The target module for the \"Part 2\" that requires information from both Versions' Part 1s"
     )
 
     def resource_string(self, path):

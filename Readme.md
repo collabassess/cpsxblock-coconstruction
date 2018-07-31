@@ -27,7 +27,7 @@ This XBlock allows the edX content creator to create interconnected questions in
 # Development
 You will need [Docker](https://www.docker.com/get-docker). If you are using a Linux distro, [read here](https://docs.docker.com/compose/install/#install-compose) to learn how to properly install Docker Compose.
 
-After installation, perform these tasks:
+After Docker's installation, perform these tasks:
     
  1. `git clone` this repository
  2. `cd cpsxblock-coconstruction`

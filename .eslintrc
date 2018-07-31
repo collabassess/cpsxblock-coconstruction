@@ -1,0 +1,25 @@
+{
+    "rules": {
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"]
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": true
+    },
+    "globals": {
+        "$": true
+    }
+}

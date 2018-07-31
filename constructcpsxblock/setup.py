@@ -24,7 +24,7 @@ def package_data(pkg, roots):
 setup(
     name='constructcpsxblock-xblock',
     version='0.1',
-    description='constructcpsxblock XBlock',   # TODO: write a better description.
+    description='Allows for co-constructed problems using the CPSXBlock',
     license='UNKNOWN',          # TODO: choose a license: 'AGPL v3' and 'Apache 2.0' are popular.
     packages=[
         'constructcpsxblock',
