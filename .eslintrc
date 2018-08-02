@@ -20,6 +20,8 @@
         "browser": true
     },
     "globals": {
-        "$": true
+        "$": true,
+        "runtime": true,
+        "element": true
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Indicator extends Component {
+export default class Indicator extends Component {
 
     render() {
         return (

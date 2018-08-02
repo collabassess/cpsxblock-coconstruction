@@ -1,8 +1,18 @@
-version: '2'
+version: '3.3'
+
 services:
-  dev:
-    image: 'cpsxblock/coconstruct'
-    container_name: xblock-coconstruct
-    build: .
+  sdk:
+    image: 'cpsxblock/sdkenv'
+    container_name: xblock-coconstruct-sdkenv
+    build: 
+      context: ./
+      dockerfile: ./docker/sdk/Dockerfile
+  app:
+    container_name: xblock-coconstruct-app
+    build: 
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
     ports:
-      - "5000:8000"
+      - '5000:8000'
+    volumes:
+      - './constructcpsxblock/constructcpsxblock/static:/usr/local/var/xblock/constructcpsxblock/constructcpsxblock/static'

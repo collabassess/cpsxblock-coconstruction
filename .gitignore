@@ -3,3 +3,6 @@
 
 # Node
 node_modules
+
+# Web assets are dynamically built:
+constructcpsxblock/constructcpsxblock/static/**/*
