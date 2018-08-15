@@ -37,10 +37,24 @@ class CoConstructCPSXBlock(XBlock):
         help="The target module for the \"Part 2\" that requires information from both Versions' Part 1s"
     )
 
+    editable_fields = (
+        "provider_userA",
+        "provider_userB",
+        "receiver_userA",
+        "receiver_userB"
+    )
+
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
         data = pkg_resources.resource_string(__name__, path)
         return data.decode("utf8")
+    
+    display_name = String(
+        display_name="CoConstructCPSXBlock",
+        help="Enables co-constructed, context-dependent items for collaborative problem solving",
+        scope=Scope.settings,
+        default="CoConstructCPSXBlock"
+    )
 
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
