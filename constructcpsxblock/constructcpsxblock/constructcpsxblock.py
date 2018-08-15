@@ -1,18 +1,27 @@
 import re
 import json
+import logging
 
 import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Scope, String
 from xblock.fragment import Fragment
+from xblockutils.studio_editable import StudioEditableXBlockMixin
 
 import requests
 
 BASE_URL = "http://ec2-54-156-197-224.compute-1.amazonaws.com"
 PORT     = "3050"
 
+log = logging.getLogger(__name__)
+
+logging.basicConfig(level = logging.ERROR)
+logging.disable(logging.CRITICAL)
+logging.disable(logging.DEBUG)
+logging.disable(logging.INFO)
+
 @XBlock.needs('user')
-class CoConstructCPSXBlock(XBlock):
+class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
     """
     Add-on to the CPSXBlock which allows for co-constructed problems (those which require previous information for solutions)
     """
