@@ -1,5 +1,6 @@
 # VS Code
 .vscode
+cpsxcc.code-workspace
 
 # Node
 node_modules

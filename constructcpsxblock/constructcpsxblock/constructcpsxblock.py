@@ -3,7 +3,7 @@ import json
 
 import pkg_resources
 from xblock.core import XBlock
-from xblock.fields import Integer, Scope, String
+from xblock.fields import Scope, String
 from xblock.fragment import Fragment
 
 import requests

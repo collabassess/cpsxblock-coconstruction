@@ -21,21 +21,6 @@ const providerA = data.providerA,
       receiverA = data.receiverA,
       receiverB = data.receiverB;
 
-function updateCount(result) {
-    $('.count', element).text(result.count);
-}
-
-var handlerUrl = runtime.handlerUrl(element, 'increment_count');
-
-$('p', element).click(function(eventObject) {
-    $.ajax({
-        type: "POST",
-        url: handlerUrl,
-        data: JSON.stringify({"hello": "world"}),
-        success: updateCount
-    });
-});
-
 $(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
     let handle = runtime.handlerUrl(element, 'problem_submit'),
         ans    = $(`#input${shortModuleID(receiverB)}_2_1`)[0].value;
