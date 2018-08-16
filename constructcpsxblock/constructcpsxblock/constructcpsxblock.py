@@ -10,9 +10,6 @@ from xblockutils.studio_editable import StudioEditableXBlockMixin
 
 import requests
 
-BASE_URL = "http://ec2-54-156-197-224.compute-1.amazonaws.com"
-PORT     = "3050"
-
 log = logging.getLogger(__name__)
 
 logging.basicConfig(level = logging.ERROR)
@@ -97,6 +94,16 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         
         return 'course-v1:NYU+DEMO_101+2018_T1'
     
+    @property
+    def config(self):
+        if not hasattr(self, "config_cache"):
+            with open(self.resource_string("config.json"), "r") as stream:
+                cache = json.loads(stream)
+
+                self.config_cache = cache
+        
+        return self.config_cache
+    
     @staticmethod
     def short_module_id(module):
         return re.match(r"problem\+block@(\w+)", module)
@@ -136,10 +143,10 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         return res.text
     
     def post_api(self, uri, json_data):
-        return requests.post("{0}:{1}{2}".format(BASE_URL, PORT, uri), json=json_data)
+        return requests.post("{0}:{1}{2}".format(self.config["host"], self.config["port"], uri), json=json_data)
     
     def post_edx(self, problem_module, data_string):
-        url = "{0}/courses/{1}/xblock/{2}/handler/xmodule_handler/problem_check".format(BASE_URL, self.course_id, problem_module)
+        url = "{0}/courses/{1}/xblock/{2}/handler/xmodule_handler/problem_check".format(self.config["host"], self.course_id, problem_module)
         key = "input_{}_2_1".format(CoConstructCPSXBlock.short_module_id(problem_module))
 
         return requests.post(url, json={key: data_string})
