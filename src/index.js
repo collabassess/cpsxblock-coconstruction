@@ -23,7 +23,7 @@ const providerA = data.providerA,
 
 $(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
     let handle = runtime.handlerUrl(element, 'problem_submit'),
-        ans    = $(`#input${shortModuleID(receiverB)}_2_1`)[0].value;
+        ans    = $(`#input_${shortModuleID(receiverA)}_2_1`)[0].value;
 
     $.ajax({
         type: "POST",
@@ -34,7 +34,7 @@ $(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
 
 $(`#problem_${shortModuleID(receiverB)} .problem .action button`).click(e => {
     let handle = runtime.handlerUrl(element, 'problem_submit'),
-        ans    = $(`#input${shortModuleID(receiverB)}_2_1`)[0].value;
+        ans    = $(`#input_${shortModuleID(receiverB)}_2_1`)[0].value;
 
     $.ajax({
         type: "POST",

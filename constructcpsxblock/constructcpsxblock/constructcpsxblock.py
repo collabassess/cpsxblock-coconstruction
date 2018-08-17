@@ -111,7 +111,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         return re.match(r"problem\+block@(\w+)", module)
     
     @XBlock.json_handler
-    def problem_submit(self, data):
+    def problem_submit(self, data, suffix=""):
         """
         Sends the server a notice that a receiver has been submitted
         """
