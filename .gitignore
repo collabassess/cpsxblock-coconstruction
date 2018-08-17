@@ -6,5 +6,4 @@ cpsxcc.code-workspace
 node_modules
 
 # Web assets are dynamically built:
-constructcpsxblock/constructcpsxblock/static/**/*
-constructcpsxblock/constructcpsxblock/static/js/src/constructcpsxblock.js
+constructcpsxblock/constructcpsxblock/static/js/*
