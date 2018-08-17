@@ -54,6 +54,8 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
     )
 
     editable_fields = (
+        "api_host",
+        "api_port",
         "provider_userA",
         "provider_userB",
         "receiver_userA",
