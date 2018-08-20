@@ -12,11 +12,6 @@ import requests
 
 log = logging.getLogger(__name__)
 
-logging.basicConfig(level = logging.ERROR)
-logging.disable(logging.CRITICAL)
-logging.disable(logging.DEBUG)
-logging.disable(logging.INFO)
-
 @XBlock.needs('user')
 class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
     """
@@ -142,6 +137,8 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         # Send grader collected answers
         res = self.post_edx(rec, total_ans)
 
+        log.info(res.text)
+
         return res.text
     
     def post_api(self, uri, json_data):
@@ -150,6 +147,8 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
     def post_edx(self, problem_module, data_string):
         url = "http://{0}/courses/{1}/xblock/{2}/handler/xmodule_handler/problem_check".format("localhost", self.course_id, problem_module)
         key = "input_{}_2_1".format(CoConstructCPSXBlock.short_module_id(problem_module))
+
+        log.info("{0}, {1}".format(url, key))
 
         return requests.post(url, json={key: data_string})
     
@@ -160,7 +159,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         """
         Fetches the answer for the partner's provider problem
         """
-        data = {"curr_user": current_user, "problem_id": provider_module}
+        data = {"curr_user": current_user, "problem_id": str(provider_module)}
 
         res    = self.post_api("/sessions/getPartnerAnswerForProblem", data)
         resobj = json.loads(res.text)
@@ -174,7 +173,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         """
         Fetches the answer for the user's provider problem
         """
-        data = {"curr_user": current_user, "problem_id": provider_module}
+        data = {"curr_user": current_user, "problem_id": str(provider_module)}
 
         res    = self.post_api("/sessions/getUserAnswerForProblem", data)
         resobj = json.loads(res.text)
