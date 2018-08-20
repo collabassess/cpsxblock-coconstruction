@@ -134,10 +134,10 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
 
             total_ans = self.format_total_answer(partner_pans, user_pans, ans)
         
-        # Send grader collected answers
-        res = self.post_edx(rec, total_ans)
+        # # Send grader collected answers
+        # res = self.post_edx(rec, total_ans)
 
-        return str(res.text)
+        return {"answer": total_ans, "course_id": self.course_id, "problem": rec}
     
     def post_api(self, uri, json_data):
         return requests.post("http://{0}:{1}{2}".format(self.api_host, self.api_port, uri), json=json_data)

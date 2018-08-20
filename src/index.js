@@ -15,6 +15,26 @@ function shortModuleID(moduleID) {
     return shortID;
 }
 
+function dispatchAnswerToGrader(ansobj) {
+    let url = `${location.protocol}//${location.host}/courses/${ansobj.course_id}/xblock/${ansobj.problem}/handler/xmodule_handler/problem_check`;
+    let dat = {};
+    dat[`input_${shortModuleID(ansobj.problem)}_2_1`] = ansobj.answer;
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: dat,
+        success: result => {
+            console.log(result);
+        },
+        error: (request, status, error) => {
+            console.error(error);
+            console.error(status);
+            console.error(request.responseText);
+        }
+    });
+}
+
 // Module IDs for the co-constructed vertical subset
 const providerA = data.providerA,
       providerB = data.providerB,
@@ -29,14 +49,7 @@ $(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
         type: "POST",
         url: handle,
         data: JSON.stringify({receiver: receiverA, answer: ans}),
-        success: result => {
-            console.log(result);
-        },
-        error: (request, status, error) => {
-            console.error(error);
-            console.error(status);
-            console.error(request.responseText);
-        }
+        success: dispatchAnswerToGrader
     });
 });
 
@@ -47,6 +60,7 @@ $(`#problem_${shortModuleID(receiverB)} .problem .action button`).click(e => {
     $.ajax({
         type: "POST",
         url: handle,
-        data: JSON.stringify({receiver: receiverB, answer: ans})
+        data: JSON.stringify({receiver: receiverB, answer: ans}),
+        success: dispatchAnswerToGrader
     });
 });
