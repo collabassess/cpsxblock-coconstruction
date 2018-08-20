@@ -28,7 +28,15 @@ $(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
     $.ajax({
         type: "POST",
         url: handle,
-        data: JSON.stringify({receiver: receiverA, answer: ans})
+        data: JSON.stringify({receiver: receiverA, answer: ans}),
+        success: result => {
+            console.log(result);
+        },
+        error: (request, status, error) => {
+            console.error(error);
+            console.error(status);
+            console.error(request.responseText);
+        }
     });
 });
 

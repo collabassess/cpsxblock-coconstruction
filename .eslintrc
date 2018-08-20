@@ -1,7 +1,8 @@
 {
     "rules": {
         "indent": ["warn", 4],
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "no-console": ["error", {"allow": ["error", "warn"]}]
     },
     "extends": [
         "eslint:recommended",
