@@ -115,7 +115,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
             work = answer
 
             # Check to see if answer is escaped
-            if re.match(r"\"\d+\"|\"\d+\.\d+\"", work) is not None:
+            if re.match(r"\"\d+\"|\"\d+\.\d+\"|\\\"\d+\\\"|\\\"\d+\.\d+\\\"", work) is not None:
                 work = work.replace("\"", "")
 
             try:
@@ -128,8 +128,9 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
                 except ValueError:
                     try:
                         test = complex(work)
+                        return test
                     except ValueError:
-                        return answer
+                        return work
         else:
             # Don't need to bother typecasting
             return answer
