@@ -112,16 +112,22 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         Defaults to string for structurally complex answers.
         """
         if isinstance(answer, str):
+            work = answer
+
+            # Check to see if answer is escaped
+            if re.match(r"\"\d+\"|\"\d+\.\d+\"", work) is not None:
+                work = work.replace("\"", "")
+
             try:
-                test = int(answer)
+                test = int(work)
                 return test
             except ValueError:
                 try:
-                    test = float(answer)
+                    test = float(work)
                     return test
                 except ValueError:
                     try:
-                        test = complex(answer)
+                        test = complex(work)
                     except ValueError:
                         return answer
         else:
