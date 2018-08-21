@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Uninstall old copies of XBlock
-sudo -u edxapp /edx/bin/pip.edxapp uninstall constructcpsxblock
+# Remove old package
 cd /edx/app/edxapp
 sudo rm -rf constructcpsxblock
 

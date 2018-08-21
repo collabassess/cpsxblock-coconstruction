@@ -18,7 +18,7 @@ function shortModuleID(moduleID) {
 function dispatchAnswerToGrader(ansobj) {
     let url = `${location.protocol}//${location.host}/courses/${ansobj.course_id}/xblock/${ansobj.problem}/handler/xmodule_handler/problem_check`;
     let dat = {};
-    dat[`input_${shortModuleID(ansobj.problem)}_2_1`] = ansobj.answer;
+    dat[`input_${shortModuleID(ansobj.problem)}_2_1`] = JSON.stringify(ansobj.answer);
 
     $.ajax({
         type: "POST",

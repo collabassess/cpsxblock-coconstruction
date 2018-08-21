@@ -105,6 +105,29 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
     def short_module_id(module):
         return re.match(r"problem\+block@(\w+)", module)
     
+    @staticmethod
+    def smart_cast(answer):
+        """
+        Determine if answer is int, float, complex, or string. 
+        Defaults to string for structurally complex answers.
+        """
+        if isinstance(answer, str):
+            try:
+                test = int(answer)
+                return test
+            except ValueError:
+                try:
+                    test = float(answer)
+                    return test
+                except ValueError:
+                    try:
+                        test = complex(answer)
+                    except ValueError:
+                        return answer
+        else:
+            # Don't need to bother typecasting
+            return answer
+    
     @XBlock.json_handler
     def problem_submit(self, data, suffix=""):
         """
@@ -149,7 +172,11 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         return requests.post(url, json={key: data_string})
     
     def format_total_answer(self, provider_answer_A, provider_answer_B, receiver_ans):
-        return json.dumps({"provider_A": provider_answer_A, "provider_B": provider_answer_B, "answer": receiver_ans})
+        return {
+            "provider_A": CoConstructCPSXBlock.smart_cast(provider_answer_A), 
+            "provider_B": CoConstructCPSXBlock.smart_cast(provider_answer_B), 
+            "answer": CoConstructCPSXBlock.smart_cast(receiver_ans)
+        }
         
     def get_partner_provider_answer(self, current_user, provider_module):
         """
