@@ -24,8 +24,8 @@ function dispatchAnswerToGrader(ansobj) {
         type: "POST",
         url: url,
         data: dat,
-        success: result => {
-            console.log(result);
+        success: result => { /* eslint-disable-line no-unused-vars */
+            setTimeout(() => { location.reload(); }, 3000);
         },
         error: (request, status, error) => {
             console.error(error);
@@ -36,12 +36,10 @@ function dispatchAnswerToGrader(ansobj) {
 }
 
 // Module IDs for the co-constructed vertical subset
-const providerA = data.providerA,
-      providerB = data.providerB,
-      receiverA = data.receiverA,
+const receiverA = data.receiverA,
       receiverB = data.receiverB;
 
-$(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
+$(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => { /* eslint-disable-line no-unused-vars */
     let handle = runtime.handlerUrl(element, 'problem_submit'),
         ans    = $(`#input_${shortModuleID(receiverA)}_2_1`)[0].value;
 
@@ -53,7 +51,7 @@ $(`#problem_${shortModuleID(receiverA)} .problem .action button`).click(e => {
     });
 });
 
-$(`#problem_${shortModuleID(receiverB)} .problem .action button`).click(e => {
+$(`#problem_${shortModuleID(receiverB)} .problem .action button`).click(e => { /* eslint-disable-line no-unused-vars */
     let handle = runtime.handlerUrl(element, 'problem_submit'),
         ans    = $(`#input_${shortModuleID(receiverB)}_2_1`)[0].value;
 

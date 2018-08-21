@@ -5,14 +5,11 @@ def check(expect, answer):
 
     try:
         ans_dict = json.loads(answer)
-    except (TypeError, ValueError) as err:
-        return False
-
-    if "provider_A" not in ans_dict:
-        # Not properly formatted
-        return False
     
-    try:
+        if not isinstance(ans_dict, dict) or "provider_A" not in ans_dict:
+            # Not properly formatted or partner hasn't submitted
+            raise Exception("Processing answer...")
+
         ###
         # LOGIC HERE
         ###
@@ -21,6 +18,6 @@ def check(expect, answer):
         y = float(ans_dict["answer"])
 
         return y == m*5. + b
-    except TypeError as err:
+    except (ValueError, TypeError) as err:
         # Not passed from server yet
         raise err
