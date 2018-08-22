@@ -69,7 +69,6 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         default="CoConstructCPSXBlock"
     )
 
-    # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
         """
         The primary view of the CoConstructCPSXBlock, shown to students
@@ -77,10 +76,11 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         """
         html = self.resource_string("static/html/constructcpsxblock.html")
         frag = Fragment(html.format(self=self))
+        # No styling needed
         # frag.add_css(selaf.resource_string("static/css/constructcpsxblock.css"))
         frag.add_javascript(self.resource_string("static/js/src/constructcpsxblock.js"))
 
-        # Actual init
+        # Pass module IDs to the JS source file
         initdict = {
             'providerA': self.provider_userA, 
             'providerB': self.provider_userB, 
@@ -146,6 +146,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
 
         uid = self.get_userid()
 
+        # Catches the "return '4'" thing found below in get_userid()
         if isinstance(uid, str):
             raise Exception("User not found")
         
@@ -164,19 +165,13 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
 
             total_ans = self.format_total_answer(partner_pans, user_pans, ans)
         
-        # # Send grader collected answers
-        # res = self.post_edx(rec, total_ans)
-
         return {"answer": total_ans, "course_id": self.course_id, "problem": rec}
     
     def post_api(self, uri, json_data):
+        """
+        Submit query to the CPSX API
+        """
         return requests.post("http://{0}:{1}{2}".format(self.api_host, self.api_port, uri), json=json_data)
-    
-    def post_edx(self, problem_module, data_string):
-        url = "http://{0}/courses/{1}/xblock/{2}/handler/xmodule_handler/problem_check".format("localhost", self.course_id, problem_module)
-        key = "input_{}_2_1".format(CoConstructCPSXBlock.short_module_id(problem_module))
-
-        return requests.post(url, json={key: data_string})
     
     def format_total_answer(self, provider_answer_A, provider_answer_B, receiver_ans):
         return {
@@ -227,13 +222,14 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         try:
             return self.get_user().opt_attrs['edx-platform.user_id']
         except Exception:
+            # This return statement is copied from collabassess/CPSXblock. I have no idea why '4' was chosen.
             return '4'
 
-    # TO-DO: change this to create the scenarios you'd like to see in the
-    # workbench while developing your XBlock.
     @staticmethod
     def workbench_scenarios():
-        """A canned scenario for display in the workbench."""
+        """
+        A canned scenario for display in the workbench. Only renders for the XBlock SDK.
+        """
         return [
             ("CoConstructCPSXBlock",
              """<constructcpsxblock/>

@@ -6,6 +6,7 @@ sudo rm -rf constructcpsxblock
 
 # Move things into place and install
 cd -
+npm run build
 sudo cp -R constructcpsxblock /edx/app/edxapp/constructcpsxblock
 
 cd /edx/app/edxapp
