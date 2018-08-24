@@ -120,6 +120,8 @@ Finding the module IDs is simple: in the "Edit" pane of each `provider` and `rec
 Paste that string into each respective `provider` and `receiver` module ID setting in the CoConstructCPSXBlock settings, which should look like so:
 ![Example CoConstructCPSXBlock settings](assets/example-settings.png)
 
+**Note:** The CoConstructCPSXBlock must be the last component on the authoring page.
+
 Your item should now be properly configured!
 
 # Building
