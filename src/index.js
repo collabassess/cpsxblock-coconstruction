@@ -25,7 +25,7 @@ function dispatchAnswerToGrader(ansobj) {
         url: url,
         data: dat,
         success: result => { /* eslint-disable-line no-unused-vars */
-            setTimeout(() => { location.reload(); }, 3000);
+            setTimeout(() => { location.reload(); }, 2000);
         },
         error: (request, status, error) => {
             console.error(error);
