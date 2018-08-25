@@ -174,6 +174,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         return requests.post("http://{0}:{1}{2}".format(self.api_host, self.api_port, uri), json=json_data)
     
     def format_total_answer(self, provider_answer_A, provider_answer_B, receiver_ans):
+        # Could pass error in this dictionary and filter
         return {
             "provider_A": CoConstructCPSXBlock.smart_cast(provider_answer_A), 
             "provider_B": CoConstructCPSXBlock.smart_cast(provider_answer_B), 
@@ -190,6 +191,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         resobj = json.loads(res.text)
 
         if "ans" not in resobj:
+            # If you want to handle individual errors, change line to `return resobj["err"]`
             raise Exception(resobj["err"])
         else:
             return resobj["ans"]
@@ -204,6 +206,7 @@ class CoConstructCPSXBlock(StudioEditableXBlockMixin, XBlock):
         resobj = json.loads(res.text)
 
         if "ans" not in resobj:
+            # If you want to handle individual errors, change line to `return resobj["err"]`
             raise Exception(resobj["err"])
         else:
             return resobj["ans"]
